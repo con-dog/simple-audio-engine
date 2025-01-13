@@ -7,4 +7,6 @@
 #define D4 277.18f
 #define E4 329.63
 
+#define SAMPLE_RATE_CD 44100
+
 #endif
