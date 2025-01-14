@@ -3,26 +3,24 @@
 
 #include <stdlib.h>
 
-typedef float Frequency;
-typedef float Milliseconds;
-
-typedef struct SimpleNote {
-  Milliseconds   duration;
-  Frequency freq;
-} SimpleNote __attribute__((packed));;
-
 typedef uint8_t Byte;
 typedef uint16_t Word;
 typedef uint32_t DWord;
 typedef uint64_t QWord;
 
+typedef double Frequency;
+typedef float Seconds;
+
+#pragma pack(push, 1)
 typedef struct MasterRIFFChunk
 {
   DWord file_type_bloc_id; // Identifier « RIFF »
   DWord file_size; // Overall file size minus 8 bytes
   DWord file_format_id; // Format = « WAVE »
-} MasterRIFFChunk __attribute__((packed));;
+} MasterRIFFChunk;
+#pragma pack(pop)
 
+#pragma pack(push, 1)
 typedef struct WavDataFormatChunk {
   DWord format_bloc_id; // Identifier « fmt␣ »
   DWord bloc_size; // Chunk size minus 8 bytes
@@ -32,23 +30,35 @@ typedef struct WavDataFormatChunk {
   DWord byte_per_sec; // Number of bytes to read per second (Frequency * BytePerBloc)
   Word byte_per_bloc; // Number of bytes per block (NbrChannels * BitsPerSample / 8)
   Word bits_per_sample; // Number of bits per sample
-} WavDataFormatChunk __attribute__((packed));;
+} WavDataFormatChunk;
+#pragma pack(pop)
 
+#pragma pack(push, 1)
 typedef struct SampledDataChunk {
   DWord data_bloc_id; // Identifier « data »
   DWord data_size; // SampledData size
   // SampledData
-} SampledDataChunk __attribute__((packed));;
+} SampledDataChunk;
+#pragma pack(pop)
 
+#pragma pack(push, 1)
 typedef struct WavHeader
 {
-  MasterRIFFChunk riff_chunk;
-  WavDataFormatChunk format_chunk;
+  MasterRIFFChunk riff;
+  WavDataFormatChunk format;
   SampledDataChunk sample;
-} WavHeader __attribute__((packed));;
+} WavHeader;
+#pragma pack(pop)
+
+#pragma pack(push, 1)
+typedef struct SimpleNote {
+  Seconds   duration;
+  Frequency freq;
+} SimpleNote;
+#pragma pack(pop)
+
 
 Word le_word_hex_builder(Byte *arr, size_t len);
 DWord le_dword_hex_builder(Byte *arr, size_t len);
-
 
 #endif
