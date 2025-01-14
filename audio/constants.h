@@ -45,4 +45,26 @@
 #define D8 4698.636f
 #define D9 9397.272f
 
+#define DSH0 19.445f
+#define DSH1 38.891f
+#define DSH2 77.782f
+#define DSH3 155.563f
+#define DSH4 311.127f
+#define DSH5 622.254f
+#define DSH6 1244.508f
+#define DSH7 2489.016f
+#define DSH8 4978.032f
+#define DSH9 9956.064f
+
+#define EFLT0 DSH0
+#define EFLT1 DSH1
+#define EFLT2 DSH2
+#define EFLT3 DSH3
+#define EFLT4 DSH4
+#define EFLT5 DSH5
+#define EFLT6 DSH6
+#define EFLT7 DSH7
+#define EFLT8 DSH8
+#define EFLT9 DSH9
+
 #endif
