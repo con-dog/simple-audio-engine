@@ -19,16 +19,16 @@ int main(void)
   for (int i = 0; i < num_samples; i += 2)
   {
     int sample_num = i / 2;
-    stereo_samples[i] = 0.7 * sinusoidal_sample_8bit(sample_num, C3) + 0.3 * square_sample_8bit(sample_num, C1);
-    stereo_samples[i + 1] = sinusoidal_sample_8bit(sample_num, E4);
+    stereo_samples[i] = 0.7 * sinusoidal_sample_8bit(sample_num, C3) + 0.3 * square_sample_8bit(sample_num, CSH2);
+    stereo_samples[i + 1] = sinusoidal_sample_8bit(sample_num, D3);
   }
 
   Byte *stereo_square_samples = malloc(num_samples);
   for (int i = 0; i < num_samples; i += 2)
   {
     int sample_num = i / 2;
-    stereo_square_samples[i] = square_sample_8bit(sample_num, C2);
-    stereo_square_samples[i + 1] = square_sample_8bit(sample_num, E4);
+    stereo_square_samples[i] = square_sample_8bit(sample_num, CSH2);
+    stereo_square_samples[i + 1] = square_sample_8bit(sample_num, D4);
   }
 
   /* ----------------
