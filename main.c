@@ -19,8 +19,8 @@ int main(void)
   for (int i = 0; i < num_samples / 2; i += 2)
   {
     int sample_num = i / 2;
-    stereo_samples[i] = 0.7 * sinusoidal_sample_8bit(sample_num, C3) + 0.3 * square_sample_8bit(sample_num, CSH2);
-    stereo_samples[i + 1] = sinusoidal_sample_8bit(sample_num, D3);
+    stereo_samples[i] = sinusoidal_sample_8bit(sample_num, FSH2);
+    stereo_samples[i + 1] = sinusoidal_sample_8bit(sample_num, DSH3);
   }
 
   for (int i = num_samples / 2; i < num_samples; i++)

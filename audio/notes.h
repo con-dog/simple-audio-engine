@@ -111,5 +111,16 @@
 #define GFLT8 FSH8
 #define GFLT9 FSH9
 
+#define G0 24.499f
+#define G1 48.999f
+#define G2 97.999f
+#define G3 195.998f
+#define G4 391.995f
+#define G5 783.991f
+#define G6 1567.982f
+#define G7 3135.964f
+#define G8 6271.928f
+#define G9 12543.856f
+
 
 #endif
