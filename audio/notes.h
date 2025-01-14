@@ -78,5 +78,16 @@
 #define E8 5274.042f
 #define E9 10548.084f
 
+#define F0 21.827f
+#define F1 43.654f
+#define F2 87.307f
+#define F3 174.614f
+#define F4 349.228f
+#define F5 698.456f
+#define F6 1396.913f
+#define F7 2793.826f
+#define F8 5587.652f
+#define F9 11175.304f
+
 
 #endif
