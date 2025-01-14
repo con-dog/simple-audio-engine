@@ -1,12 +1,5 @@
 #include "main.h"
 
-Byte sinusoidal_sample_8bit(DWord sample_no, Frequency note)
-{
-  double sample = (BYTE_MIDPOINT - 1) * sin((2 * M_PI * sample_no * note) / SAMPLE_RATE);
-  double final_sample = BYTE_MIDPOINT + sample;
-  return final_sample < 0 ? 0 : (final_sample > 255 ? 255 : final_sample);
-}
-
 int main(void)
 {
   WavHeader header = {0};
@@ -48,6 +41,14 @@ int main(void)
     stereo_samples[i + 1] = sinusoidal_sample_8bit(sample_num, E4);
   }
 
+  Byte *stereo_square_samples = malloc(num_samples);
+  for (int i = 0; i < num_samples; i += 2)
+  {
+    int sample_num = i / 2;
+    stereo_square_samples[i] = square_sample_8bit(sample_num, C4);
+    stereo_square_samples[i + 1] = square_sample_8bit(sample_num, E4);
+  }
+
   /* ----------------
    * Update file size
    * --------------*/
@@ -67,11 +68,18 @@ int main(void)
     return EXIT_FAILURE;
   }
 
+  FILE *fp2 = fopen("out-2.wav", "wb");
+
   fwrite(&header, sizeof(WavHeader), 1, fp);
   fwrite(stereo_samples, sizeof(Byte), num_samples, fp);
 
+  fwrite(&header, sizeof(WavHeader), 1, fp2);
+  fwrite(stereo_square_samples, sizeof(Byte), num_samples, fp2);
+
   free(stereo_samples);
+  free(stereo_square_samples);
   fclose(fp);
+  fclose(fp2);
 
   return EXIT_SUCCESS;
 }

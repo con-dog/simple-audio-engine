@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include "./audio/constants.h"
+#include "./audio/8bit/sampling.h"
 #include "./config/constants.h"
 #include "./lib/wav/definitions.h"
 #include "./lib/audio-definitions.h"
