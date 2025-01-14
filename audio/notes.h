@@ -89,5 +89,27 @@
 #define F8 5587.652f
 #define F9 11175.304f
 
+#define FSH0 23.124f
+#define FSH1 46.249f
+#define FSH2 92.499f
+#define FSH3 184.997f
+#define FSH4 369.994f
+#define FSH5 739.989f
+#define FSH6 1479.978f
+#define FSH7 2959.955f
+#define FSH8 5919.910f
+#define FSH9 11839.820f
+
+#define GFLT0 FSH0
+#define GFLT1 FSH1
+#define GFLT2 FSH2
+#define GFLT3 FSH3
+#define GFLT4 FSH4
+#define GFLT5 FSH5
+#define GFLT6 FSH6
+#define GFLT7 FSH7
+#define GFLT8 FSH8
+#define GFLT9 FSH9
+
 
 #endif
