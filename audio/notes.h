@@ -144,5 +144,15 @@
 #define AFLT8 GSH8
 #define AFLT9 GSH9
 
+#define A0 27.500f
+#define A1 55.000f
+#define A2 110.000f
+#define A3 220.000f
+#define A4 440.000f
+#define A5 880.000f
+#define A6 1760.000f
+#define A7 3520.000f
+#define A8 7040.000f
+#define A9 14080.000f
 
 #endif
