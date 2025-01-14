@@ -5,6 +5,6 @@
 #include <stdio.h>
 
 #include "./constants.h"
-#include "./defintions.h"
+#include "./definitions.h"
 
 #endif

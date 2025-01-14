@@ -1,60 +1,66 @@
 #include "main.h"
 
-/*
- * Takes in an array of Bytes in Big-Endian order and converts it to a single Hex
- * value in Little-Endian order
- */
-DWord le_dword_hex_builder(Byte *arr, size_t len)
-{
-  DWord hex = 0;
-  for (size_t i = 0; i < len; i++)
-  {
-    hex |= (arr[i] << BYTE * i);
-  }
-  return hex;
-}
-
-Word le_word_hex_builder(Byte *arr, size_t len)
-{
-  Word hex = 0;
-  for (size_t i = 0; i < len; i++)
-  {
-    hex |= (arr[i] << BYTE * i);
-  }
-  return hex;
-}
-
 Byte sinusoidal_sample(DWord sample_no, Frequency note)
 {
-  return BYTE_WAVE_CENTER + BYTE_WAVE_CENTER * sin((2 * M_PI * sample_no * note) / SAMPLE_RATE_CD);
+  double sample = (BYTE_WAVE_CENTER - 1) * sin((2 * M_PI * sample_no * note) / SAMPLE_RATE_CD);
+  double final_sample = BYTE_WAVE_CENTER + sample;
+  return final_sample < 0 ? 0 : (final_sample > 255 ? 255 : final_sample);
 }
 
 int main(void)
 {
-  WavHeader header;
+  WavHeader header = {0}; // Initialize all to 0 first
 
-  header.riff.file_type_bloc_id = le_dword_hex_builder((Byte[]){0x52, 0x49, 0x46, 0x46}, 4);
-  header.riff.file_format_id = le_dword_hex_builder((Byte[]){0x57, 0x41, 0x56, 0x45}, 4);
-  header.format.format_bloc_id = le_dword_hex_builder((Byte[]){0x66, 0x6D, 0x74, 0x20}, 4);
-  header.format.bloc_size = le_dword_hex_builder((Byte[]){0x00, 0x00, 0x00, 0x10}, 4);
-  header.format.audio_format = le_word_hex_builder((Byte[]){0x00, 0x01}, 2);
-  header.format.nbr_channels = le_word_hex_builder((Byte[]){0x00, 0x02}, 2);
-  header.format.frequency = le_dword_hex_builder((Byte[]){0x00, 0x00, 0xAC, 0x44}, 4);
-  header.format.bits_per_sample = le_word_hex_builder((Byte[]){0x00, 0x08}, 2);
-  header.format.byte_per_bloc = le_word_hex_builder((Byte[]){0x00, 0x02}, 2);
-  header.format.byte_per_sec = le_dword_hex_builder((Byte[]){0x00, 0x02, 0xB1, 0x10}, 4);
-  header.sample.data_bloc_id = le_dword_hex_builder((Byte[]){0x64, 0x61, 0x74, 0x61}, 4);
+  // RIFF header
+  header.riff.file_type_bloc_id = *(DWord *)"RIFF"; // This handles endianness correctly
+  header.riff.file_format_id = *(DWord *)"WAVE";
 
+  // Format chunk
+  header.format.format_bloc_id = *(DWord *)"fmt ";
+  header.format.bloc_size = 16;    // Size of format chunk
+  header.format.audio_format = 1;  // PCM
+  header.format.nbr_channels = 2;  // Stereo
+  header.format.frequency = 44100; // 44.1kHz
+  header.format.bits_per_sample = 8;
+  header.format.byte_per_bloc = (header.format.nbr_channels * header.format.bits_per_sample) / 8;
+  header.format.byte_per_sec = header.format.frequency * header.format.byte_per_bloc;
+
+  // Data chunk
+  header.sample.data_bloc_id = *(DWord *)"data";
+
+  // Calculate samples
   Seconds t = 1;
-  int num_samples = SAMPLE_RATE_CD * t * 2;
-  Byte stereo_samples[num_samples];
+  int num_samples = SAMPLE_RATE_CD * t * 2; // 2 channels
+  Byte *stereo_samples = malloc(num_samples);
+  if (!stereo_samples)
+  {
+    fprintf(stderr, "Memory allocation failed\n");
+    return EXIT_FAILURE;
+  }
+
   for (int i = 0; i < num_samples; i += 2)
   {
-    DWord sample_num = i / 2;
+    int sample_num = i / 2;
     stereo_samples[i] = sinusoidal_sample(sample_num, C4);
     stereo_samples[i + 1] = sinusoidal_sample(sample_num, C4);
   }
 
+  // Set sizes
   header.sample.data_size = num_samples;
-  header.riff.file_size = sizeof(WavHeader) + num_samples - 8;
+  header.riff.file_size = sizeof(WavHeader) - 8 + num_samples; // -8 for RIFF header
+
+  FILE *fp = fopen("out.wav", "wb");
+  if (fp == NULL)
+  {
+    fprintf(stderr, "Can't open out.wav\n");
+    free(stereo_samples);
+    return EXIT_FAILURE;
+  }
+
+  fwrite(&header, sizeof(WavHeader), 1, fp);
+  fwrite(stereo_samples, sizeof(Byte), num_samples, fp);
+
+  free(stereo_samples);
+  fclose(fp);
+  return EXIT_SUCCESS;
 }
