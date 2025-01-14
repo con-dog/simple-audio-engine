@@ -122,5 +122,16 @@
 #define G8 6271.928f
 #define G9 12543.856f
 
+#define GSH0 25.956f
+#define GSH1 51.913f
+#define GSH2 103.826f
+#define GSH3 207.652f
+#define GSH4 415.305f
+#define GSH5 830.609f
+#define GSH6 1661.219f
+#define GSH7 3322.438f
+#define GSH8 6644.876f
+#define GSH9 13289.752f
+
 
 #endif
