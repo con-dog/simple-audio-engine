@@ -1,5 +1,5 @@
-#ifndef AUDIO_CONSTANTS_H
-#define AUDIO_CONSTANTS_H
+#ifndef AUDIO_NOTES_H
+#define AUDIO_NOTES_H
 
 #define C0 16.35f
 #define C1 32.703f
@@ -66,5 +66,17 @@
 #define EFLT7 DSH7
 #define EFLT8 DSH8
 #define EFLT9 DSH9
+
+#define E0 20.601f
+#define E1 41.203f
+#define E2 82.407f
+#define E3 164.814f
+#define E4 329.628f
+#define E5 659.255f
+#define E6 1318.51f
+#define E7 2637.021f
+#define E8 5274.042f
+#define E9 10548.084f
+
 
 #endif

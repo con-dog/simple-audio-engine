@@ -4,7 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 
-#include "./audio/constants.h"
+#include "./audio/notes.h"
 #include "./audio/8bit/sampling.h"
 #include "./config/constants.h"
 #include "./lib/wav/definitions.h"
