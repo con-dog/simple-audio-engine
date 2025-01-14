@@ -4,7 +4,12 @@
 #include <math.h>
 #include <stdio.h>
 
-#include "./constants.h"
-#include "./definitions.h"
+#include "./audio/constants.h"
+#include "./config/constants.h"
+#include "./lib/wav/definitions.h"
+#include "./lib/audio-definitions.h"
+#include "./lib/binary-constants.h"
+#include "./lib/binary-definitions.h"
+#include "./lib/time-definitions.h"
 
 #endif

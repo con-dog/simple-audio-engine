@@ -1,9 +1,9 @@
 #include "main.h"
 
-Byte sinusoidal_sample(DWord sample_no, Frequency note)
+Byte sinusoidal_sample_8bit(DWord sample_no, Frequency note)
 {
-  double sample = (BYTE_WAVE_CENTER - 1) * sin((2 * M_PI * sample_no * note) / SAMPLE_RATE_CD);
-  double final_sample = BYTE_WAVE_CENTER + sample;
+  double sample = (BYTE_MIDPOINT - 1) * sin((2 * M_PI * sample_no * note) / SAMPLE_RATE);
+  double final_sample = BYTE_MIDPOINT + sample;
   return final_sample < 0 ? 0 : (final_sample > 255 ? 255 : final_sample);
 }
 
@@ -22,7 +22,7 @@ int main(void)
   header.format.bloc_size = 16;
   header.format.audio_format = 1;
   header.format.nbr_channels = 2;
-  header.format.frequency = 44100;
+  header.format.frequency = SAMPLE_RATE;
   header.format.bits_per_sample = 8;
   header.format.byte_per_bloc = (header.format.nbr_channels * header.format.bits_per_sample) / 8;
   header.format.byte_per_sec = header.format.frequency * header.format.byte_per_bloc;
@@ -32,8 +32,8 @@ int main(void)
   /* ----------------
    * Calculate samples
    * --------------*/
-  Seconds t = 1;
-  int num_samples = SAMPLE_RATE_CD * t * header.format.nbr_channels;
+  Seconds t = 5;
+  int num_samples = SAMPLE_RATE * t * header.format.nbr_channels;
   Byte *stereo_samples = malloc(num_samples);
   if (!stereo_samples)
   {
@@ -44,8 +44,8 @@ int main(void)
   for (int i = 0; i < num_samples; i += 2)
   {
     int sample_num = i / 2;
-    stereo_samples[i] = sinusoidal_sample(sample_num, C4);
-    stereo_samples[i + 1] = sinusoidal_sample(sample_num, C4);
+    stereo_samples[i] = sinusoidal_sample_8bit(sample_num, C4);
+    stereo_samples[i + 1] = sinusoidal_sample_8bit(sample_num, E4);
   }
 
   /* ----------------

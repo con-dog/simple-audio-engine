@@ -1,0 +1,6 @@
+#ifndef BINARY_CONSTANTS_H
+#define BINARY_CONSTANTS_H
+
+#define BYTE_MIDPOINT 128
+
+#endif
