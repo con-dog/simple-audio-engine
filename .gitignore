@@ -1,0 +1,8 @@
+# Ignore executables with no extension
+*
+!*.*
+!*/
+!makefile
+*.o
+.~lock.*.csv*
+.DS_store
