@@ -133,5 +133,16 @@
 #define GSH8 6644.876f
 #define GSH9 13289.752f
 
+#define AFLT0 GSH0
+#define AFLT1 GSH1
+#define AFLT2 GSH2
+#define AFLT3 GSH3
+#define AFLT4 GSH4
+#define AFLT5 GSH5
+#define AFLT6 GSH6
+#define AFLT7 GSH7
+#define AFLT8 GSH8
+#define AFLT9 GSH9
+
 
 #endif
