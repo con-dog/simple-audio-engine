@@ -155,4 +155,15 @@
 #define A8 7040.000f
 #define A9 14080.000f
 
+#define ASH0 29.135f
+#define ASH1 58.270f
+#define ASH2 116.541f
+#define ASH3 233.082f
+#define ASH4 466.164f
+#define ASH5 932.328f
+#define ASH6 1864.655f
+#define ASH7 3729.310f
+#define ASH8 7458.620f
+#define ASH9 14917.240f
+
 #endif
