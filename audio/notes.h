@@ -177,4 +177,15 @@
 #define BFLT8 ASH8
 #define BFLT9 ASH9
 
+#define B0 30.868f
+#define B1 61.735f
+#define B2 123.471f
+#define B3 246.942f
+#define B4 493.883f
+#define B5 987.767f
+#define B6 1975.533f
+#define B7 3951.066f
+#define B8 7902.132f
+#define B9 15804.264f
+
 #endif
