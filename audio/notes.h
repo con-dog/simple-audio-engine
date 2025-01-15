@@ -166,4 +166,15 @@
 #define ASH8 7458.620f
 #define ASH9 14917.240f
 
+#define BFLT0 ASH0
+#define BFLT1 ASH1
+#define BFLT2 ASH2
+#define BFLT3 ASH3
+#define BFLT4 ASH4
+#define BFLT5 ASH5
+#define BFLT6 ASH6
+#define BFLT7 ASH7
+#define BFLT8 ASH8
+#define BFLT9 ASH9
+
 #endif
